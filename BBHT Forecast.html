@@ -27,16 +27,16 @@
 <body>
 <div class="container">
   <h1>BBHT Forecast</h1>
-  <div class="subtitle">Published Feb 09, 2026 &middot; Day 2.6 &middot; Target: Feb 15, 2026</div>
+  <div class="subtitle">Published Feb 09, 2026 &middot; Day 2.7 &middot; Target: Feb 15, 2026</div>
 
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Current Views</div>
-      <div class="stat-value">70,090,704</div>
+      <div class="stat-value">70,611,833</div>
     </div>
     <div class="stat">
       <div class="stat-label">Views Last Hour</div>
-      <div class="stat-value">493,589</div>
+      <div class="stat-value">478,336</div>
     </div>
     <div class="stat">
       <div class="stat-label">Views/Hr (12h avg)</div>
@@ -48,33 +48,33 @@
     </div>
     <div class="stat">
       <div class="stat-label">Views/Hr (Overall)</div>
-      <div class="stat-value">487,736</div>
+      <div class="stat-value">481,403</div>
     </div>
     <div class="stat">
       <div class="stat-label">Days Remaining</div>
-      <div class="stat-value">3.2</div>
+      <div class="stat-value">3.1</div>
     </div>
     <div class="stat">
       <div class="stat-label">Observed Decay (1h)</div>
-      <div class="stat-value">—</div>
+      <div class="stat-value">0.295</div>
     </div>
     <div class="stat">
       <div class="stat-label">Observed Decay (6h)</div>
-      <div class="stat-value">—</div>
+      <div class="stat-value">0.295</div>
     </div>
     <div class="stat">
       <div class="stat-label">Observed Decay (12h)</div>
-      <div class="stat-value">—</div>
+      <div class="stat-value">0.295</div>
     </div>
     <div class="stat">
       <div class="stat-label">Projected (0.82) by Feb 15</div>
-      <div class="stat-value accent">102,526,731 <span style="font-size:14px;color:#00c853">(+32,436,027)</span></div>
+      <div class="stat-value accent">96,013,913 <span style="font-size:14px;color:#00c853">(+25,402,080)</span></div>
     </div>    <div class="stat">
       <div class="stat-label">Projected (0.6) by Feb 15</div>
-      <div class="stat-value accent">95,184,630 <span style="font-size:14px;color:#00c853">(+25,093,926)</span></div>
+      <div class="stat-value accent">90,360,075 <span style="font-size:14px;color:#00c853">(+19,748,242)</span></div>
     </div>    <div class="stat">
       <div class="stat-label">Projected (0.4) by Feb 15</div>
-      <div class="stat-value accent">89,858,356 <span style="font-size:14px;color:#00c853">(+19,767,652)</span></div>
+      <div class="stat-value accent">86,216,882 <span style="font-size:14px;color:#00c853">(+15,605,049)</span></div>
     </div>
   </div>
 
@@ -88,12 +88,12 @@
     <canvas id="dailyChart"></canvas>
   </div>
 
-  <div class="updated">Last updated: 2026-02-11 20:22:43 UTC &middot; Auto-refreshes every 5 min</div>
+  <div class="updated">Last updated: 2026-02-11 21:28:41 UTC &middot; Auto-refreshes every 5 min</div>
 </div>
 
 <script>
-const historical = [{"date": "2026-02-11T19:05:04Z", "views": 69459445}, {"date": "2026-02-11T19:10:04Z", "views": 69503861}, {"date": "2026-02-11T19:15:05Z", "views": 69535434}, {"date": "2026-02-11T19:20:05Z", "views": 69575451}, {"date": "2026-02-11T19:25:05Z", "views": 69614377}, {"date": "2026-02-11T19:30:06Z", "views": 69667173}, {"date": "2026-02-11T19:35:06Z", "views": 69689411}, {"date": "2026-02-11T19:40:07Z", "views": 69729319}, {"date": "2026-02-11T19:45:07Z", "views": 69755021}, {"date": "2026-02-11T19:50:08Z", "views": 69776012}, {"date": "2026-02-11T19:55:08Z", "views": 69829936}, {"date": "2026-02-11T20:00:08Z", "views": 69868899}, {"date": "2026-02-11T20:05:09Z", "views": 69910248}, {"date": "2026-02-11T20:10:09Z", "views": 69966559}, {"date": "2026-02-11T20:12:42Z", "views": 70000317}, {"date": "2026-02-11T20:17:43Z", "views": 70046907}, {"date": "2026-02-11T20:22:43Z", "views": 70090704}];
-const scenarios = {"0.82": {"cumulative": [{"date": "2026-02-11T20:22:43Z", "views": 70090704}, {"date": "2026-02-12T20:22:43Z", "views": 82684319}, {"date": "2026-02-13T20:22:43Z", "views": 93011084}, {"date": "2026-02-14T20:22:43Z", "views": 101479031}, {"date": "2026-02-15T20:22:43Z", "views": 102526731}], "daily": [{"date": "2026-02-11T20:22:43Z", "views": 12593615}, {"date": "2026-02-12T20:22:43Z", "views": 10326764}, {"date": "2026-02-13T20:22:43Z", "views": 8467947}, {"date": "2026-02-14T20:22:43Z", "views": 6943716}, {"date": "2026-02-15T20:22:43Z", "views": 5693847}]}, "0.6": {"cumulative": [{"date": "2026-02-11T20:22:43Z", "views": 70090704}, {"date": "2026-02-12T20:22:43Z", "views": 82684319}, {"date": "2026-02-13T20:22:43Z", "views": 90240489}, {"date": "2026-02-14T20:22:43Z", "views": 94774190}, {"date": "2026-02-15T20:22:43Z", "views": 95184630}], "daily": [{"date": "2026-02-11T20:22:43Z", "views": 12593615}, {"date": "2026-02-12T20:22:43Z", "views": 7556169}, {"date": "2026-02-13T20:22:43Z", "views": 4533701}, {"date": "2026-02-14T20:22:43Z", "views": 2720221}, {"date": "2026-02-15T20:22:43Z", "views": 1632132}]}, "0.4": {"cumulative": [{"date": "2026-02-11T20:22:43Z", "views": 70090704}, {"date": "2026-02-12T20:22:43Z", "views": 82684319}, {"date": "2026-02-13T20:22:43Z", "views": 87721766}, {"date": "2026-02-14T20:22:43Z", "views": 89736744}, {"date": "2026-02-15T20:22:43Z", "views": 89858356}], "daily": [{"date": "2026-02-11T20:22:43Z", "views": 12593615}, {"date": "2026-02-12T20:22:43Z", "views": 5037446}, {"date": "2026-02-13T20:22:43Z", "views": 2014978}, {"date": "2026-02-14T20:22:43Z", "views": 805991}, {"date": "2026-02-15T20:22:43Z", "views": 322396}]}};
+const historical = [{"date": "2026-02-11T19:05:04Z", "views": 69459445}, {"date": "2026-02-11T19:10:04Z", "views": 69503861}, {"date": "2026-02-11T19:15:05Z", "views": 69535434}, {"date": "2026-02-11T19:20:05Z", "views": 69575451}, {"date": "2026-02-11T19:25:05Z", "views": 69614377}, {"date": "2026-02-11T19:30:06Z", "views": 69667173}, {"date": "2026-02-11T19:35:06Z", "views": 69689411}, {"date": "2026-02-11T19:40:07Z", "views": 69729319}, {"date": "2026-02-11T19:45:07Z", "views": 69755021}, {"date": "2026-02-11T19:50:08Z", "views": 69776012}, {"date": "2026-02-11T19:55:08Z", "views": 69829936}, {"date": "2026-02-11T20:00:08Z", "views": 69868899}, {"date": "2026-02-11T20:05:09Z", "views": 69910248}, {"date": "2026-02-11T20:10:09Z", "views": 69966559}, {"date": "2026-02-11T20:12:42Z", "views": 70000317}, {"date": "2026-02-11T20:17:43Z", "views": 70046907}, {"date": "2026-02-11T20:22:43Z", "views": 70090704}, {"date": "2026-02-11T20:27:44Z", "views": 70125800}, {"date": "2026-02-11T20:32:44Z", "views": 70157247}, {"date": "2026-02-11T20:37:44Z", "views": 70204587}, {"date": "2026-02-11T20:42:45Z", "views": 70251415}, {"date": "2026-02-11T20:47:45Z", "views": 70277529}, {"date": "2026-02-11T20:52:46Z", "views": 70324739}, {"date": "2026-02-11T20:57:46Z", "views": 70370824}, {"date": "2026-02-11T21:02:47Z", "views": 70414902}, {"date": "2026-02-11T21:07:47Z", "views": 70454332}, {"date": "2026-02-11T21:12:48Z", "views": 70510897}, {"date": "2026-02-11T21:17:48Z", "views": 70541580}, {"date": "2026-02-11T21:22:49Z", "views": 70577204}, {"date": "2026-02-11T21:23:41Z", "views": 70577204}, {"date": "2026-02-11T21:28:41Z", "views": 70611833}];
+const scenarios = {"0.82": {"cumulative": [{"date": "2026-02-11T21:28:41Z", "views": 70611833}, {"date": "2026-02-12T21:28:41Z", "views": 80572134}, {"date": "2026-02-13T21:28:41Z", "views": 88739582}, {"date": "2026-02-14T21:28:41Z", "views": 95436889}, {"date": "2026-02-15T21:28:41Z", "views": 96013913}], "daily": [{"date": "2026-02-11T21:28:41Z", "views": 9960301}, {"date": "2026-02-12T21:28:41Z", "views": 8167447}, {"date": "2026-02-13T21:28:41Z", "views": 6697307}, {"date": "2026-02-14T21:28:41Z", "views": 5491791}, {"date": "2026-02-15T21:28:41Z", "views": 4503269}]}, "0.6": {"cumulative": [{"date": "2026-02-11T21:28:41Z", "views": 70611833}, {"date": "2026-02-12T21:28:41Z", "views": 80572134}, {"date": "2026-02-13T21:28:41Z", "views": 86548316}, {"date": "2026-02-14T21:28:41Z", "views": 90134024}, {"date": "2026-02-15T21:28:41Z", "views": 90360075}], "daily": [{"date": "2026-02-11T21:28:41Z", "views": 9960301}, {"date": "2026-02-12T21:28:41Z", "views": 5976181}, {"date": "2026-02-13T21:28:41Z", "views": 3585708}, {"date": "2026-02-14T21:28:41Z", "views": 2151425}, {"date": "2026-02-15T21:28:41Z", "views": 1290855}]}, "0.4": {"cumulative": [{"date": "2026-02-11T21:28:41Z", "views": 70611833}, {"date": "2026-02-12T21:28:41Z", "views": 80572134}, {"date": "2026-02-13T21:28:41Z", "views": 84556255}, {"date": "2026-02-14T21:28:41Z", "views": 86149904}, {"date": "2026-02-15T21:28:41Z", "views": 86216882}], "daily": [{"date": "2026-02-11T21:28:41Z", "views": 9960301}, {"date": "2026-02-12T21:28:41Z", "views": 3984120}, {"date": "2026-02-13T21:28:41Z", "views": 1593648}, {"date": "2026-02-14T21:28:41Z", "views": 637459}, {"date": "2026-02-15T21:28:41Z", "views": 254983}]}};
 const scenarioColors = ['#f0b90b', '#00c853', '#e040fb'];
 
 Chart.defaults.color = '#888';
