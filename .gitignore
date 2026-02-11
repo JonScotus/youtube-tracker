@@ -1,0 +1,6 @@
+config.yaml
+.venv/
+__pycache__/
+*.pyc
+tracker.log
+report.html

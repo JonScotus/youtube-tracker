@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="300">
+<title>BBHT Forecast</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #e1e1e1; padding: 24px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { color: #888; font-size: 13px; margin-bottom: 24px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat { background: #1a1a1a; border-radius: 12px; padding: 20px; }
+  .stat-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .stat-value { font-size: 28px; font-weight: 700; }
+  .stat-value.accent { color: #f0b90b; }
+  .stat-value.green { color: #00c853; }
+  .chart-container { background: #1a1a1a; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+  .chart-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+  .updated { color: #555; font-size: 11px; text-align: center; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>BBHT Forecast</h1>
+  <div class="subtitle">Published Feb 09, 2026 &middot; Day 2.6 &middot; Target: Feb 15, 2026</div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Current Views</div>
+      <div class="stat-value">70,090,704</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Views Last Hour</div>
+      <div class="stat-value">493,589</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Views/Hr (12h avg)</div>
+      <div class="stat-value">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Views/Hr (24h avg)</div>
+      <div class="stat-value">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Views/Hr (Overall)</div>
+      <div class="stat-value">487,736</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Days Remaining</div>
+      <div class="stat-value">3.2</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Observed Decay (1h)</div>
+      <div class="stat-value">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Observed Decay (6h)</div>
+      <div class="stat-value">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Observed Decay (12h)</div>
+      <div class="stat-value">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Projected (0.82) by Feb 15</div>
+      <div class="stat-value accent">102,526,731 <span style="font-size:14px;color:#00c853">(+32,436,027)</span></div>
+    </div>    <div class="stat">
+      <div class="stat-label">Projected (0.6) by Feb 15</div>
+      <div class="stat-value accent">95,184,630 <span style="font-size:14px;color:#00c853">(+25,093,926)</span></div>
+    </div>    <div class="stat">
+      <div class="stat-label">Projected (0.4) by Feb 15</div>
+      <div class="stat-value accent">89,858,356 <span style="font-size:14px;color:#00c853">(+19,767,652)</span></div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Total Views — Actual + Projected Scenarios</div>
+    <canvas id="cumulativeChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Projected Daily Views — Decay Scenarios</div>
+    <canvas id="dailyChart"></canvas>
+  </div>
+
+  <div class="updated">Last updated: 2026-02-11 20:22:43 UTC &middot; Auto-refreshes every 5 min</div>
+</div>
+
+<script>
+const historical = [{"date": "2026-02-11T19:05:04Z", "views": 69459445}, {"date": "2026-02-11T19:10:04Z", "views": 69503861}, {"date": "2026-02-11T19:15:05Z", "views": 69535434}, {"date": "2026-02-11T19:20:05Z", "views": 69575451}, {"date": "2026-02-11T19:25:05Z", "views": 69614377}, {"date": "2026-02-11T19:30:06Z", "views": 69667173}, {"date": "2026-02-11T19:35:06Z", "views": 69689411}, {"date": "2026-02-11T19:40:07Z", "views": 69729319}, {"date": "2026-02-11T19:45:07Z", "views": 69755021}, {"date": "2026-02-11T19:50:08Z", "views": 69776012}, {"date": "2026-02-11T19:55:08Z", "views": 69829936}, {"date": "2026-02-11T20:00:08Z", "views": 69868899}, {"date": "2026-02-11T20:05:09Z", "views": 69910248}, {"date": "2026-02-11T20:10:09Z", "views": 69966559}, {"date": "2026-02-11T20:12:42Z", "views": 70000317}, {"date": "2026-02-11T20:17:43Z", "views": 70046907}, {"date": "2026-02-11T20:22:43Z", "views": 70090704}];
+const scenarios = {"0.82": {"cumulative": [{"date": "2026-02-11T20:22:43Z", "views": 70090704}, {"date": "2026-02-12T20:22:43Z", "views": 82684319}, {"date": "2026-02-13T20:22:43Z", "views": 93011084}, {"date": "2026-02-14T20:22:43Z", "views": 101479031}, {"date": "2026-02-15T20:22:43Z", "views": 102526731}], "daily": [{"date": "2026-02-11T20:22:43Z", "views": 12593615}, {"date": "2026-02-12T20:22:43Z", "views": 10326764}, {"date": "2026-02-13T20:22:43Z", "views": 8467947}, {"date": "2026-02-14T20:22:43Z", "views": 6943716}, {"date": "2026-02-15T20:22:43Z", "views": 5693847}]}, "0.6": {"cumulative": [{"date": "2026-02-11T20:22:43Z", "views": 70090704}, {"date": "2026-02-12T20:22:43Z", "views": 82684319}, {"date": "2026-02-13T20:22:43Z", "views": 90240489}, {"date": "2026-02-14T20:22:43Z", "views": 94774190}, {"date": "2026-02-15T20:22:43Z", "views": 95184630}], "daily": [{"date": "2026-02-11T20:22:43Z", "views": 12593615}, {"date": "2026-02-12T20:22:43Z", "views": 7556169}, {"date": "2026-02-13T20:22:43Z", "views": 4533701}, {"date": "2026-02-14T20:22:43Z", "views": 2720221}, {"date": "2026-02-15T20:22:43Z", "views": 1632132}]}, "0.4": {"cumulative": [{"date": "2026-02-11T20:22:43Z", "views": 70090704}, {"date": "2026-02-12T20:22:43Z", "views": 82684319}, {"date": "2026-02-13T20:22:43Z", "views": 87721766}, {"date": "2026-02-14T20:22:43Z", "views": 89736744}, {"date": "2026-02-15T20:22:43Z", "views": 89858356}], "daily": [{"date": "2026-02-11T20:22:43Z", "views": 12593615}, {"date": "2026-02-12T20:22:43Z", "views": 5037446}, {"date": "2026-02-13T20:22:43Z", "views": 2014978}, {"date": "2026-02-14T20:22:43Z", "views": 805991}, {"date": "2026-02-15T20:22:43Z", "views": 322396}]}};
+const scenarioColors = ['#f0b90b', '#00c853', '#e040fb'];
+
+Chart.defaults.color = '#888';
+Chart.defaults.borderColor = '#333';
+
+const scenarioKeys = Object.keys(scenarios);
+
+// Plugin to draw end-of-line labels on the cumulative chart
+const endLabelPlugin = {
+  id: 'endLabels',
+  afterDatasetsDraw(chart) {
+    const ctx = chart.ctx;
+    chart.data.datasets.forEach((dataset, i) => {
+      const meta = chart.getDatasetMeta(i);
+      if (!meta.visible || meta.data.length === 0) return;
+      const last = meta.data[meta.data.length - 1];
+      if (!last) return;
+      const value = dataset.data[dataset.data.length - 1]?.y;
+      if (value == null) return;
+      const label = (value / 1000000).toFixed(1) + 'M';
+      ctx.save();
+      ctx.font = 'bold 11px -apple-system, sans-serif';
+      ctx.fillStyle = dataset.borderColor;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, last.x + 6, last.y);
+      ctx.restore();
+    });
+  },
+};
+
+// Cumulative chart
+new Chart(document.getElementById('cumulativeChart'), {
+  type: 'line',
+  plugins: [endLabelPlugin],
+  data: {
+    datasets: [
+      {
+        label: 'Actual Views',
+        data: historical.map(p => ({ x: p.date, y: p.views })),
+        borderColor: '#e1e1e1',
+        backgroundColor: 'rgba(225,225,225,0.1)',
+        borderWidth: 2,
+        pointRadius: historical.length > 50 ? 0 : 2,
+        fill: true,
+      },
+      ...scenarioKeys.map((key, i) => ({
+        label: 'Decay ' + key,
+        data: scenarios[key].cumulative.map(p => ({ x: p.date, y: p.views })),
+        borderColor: scenarioColors[i % scenarioColors.length],
+        borderDash: [6, 3],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+      })),
+    ],
+  },
+  options: {
+    responsive: true,
+    layout: { padding: { right: 50 } },
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      x: { type: 'time', time: { unit: 'day' }, grid: { color: '#222' } },
+      y: { grid: { color: '#222' }, ticks: { callback: v => (v/1000000).toFixed(1) + 'M' } },
+    },
+    plugins: { legend: { labels: { usePointStyle: true } } },
+  },
+});
+
+// Daily projected chart
+new Chart(document.getElementById('dailyChart'), {
+  type: 'line',
+  data: {
+    datasets: scenarioKeys.map((key, i) => ({
+      label: 'Decay ' + key,
+      data: scenarios[key].daily.map(p => ({ x: p.date, y: p.views })),
+      borderColor: scenarioColors[i % scenarioColors.length],
+      backgroundColor: scenarioColors[i % scenarioColors.length] + '33',
+      borderWidth: 2,
+      pointRadius: 0,
+      fill: true,
+    })),
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: { type: 'time', time: { unit: 'day' }, grid: { color: '#222' } },
+      y: { grid: { color: '#222' }, ticks: { callback: v => (v/1000000).toFixed(1) + 'M' } },
+    },
+    plugins: { legend: { labels: { usePointStyle: true } } },
+  },
+});
+</script>
+</body>
+</html>
