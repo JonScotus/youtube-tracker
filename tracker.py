@@ -16,9 +16,11 @@ Environment:
 import argparse
 import csv
 import json
+import logging
 import math
 import os
 import re
+import subprocess
 import sys
 import time
 from datetime import datetime, timedelta, timezone
@@ -445,6 +447,7 @@ def generate_html_report(
 <body>
 <div class="container">
   <h1>BBHT Forecast</h1>
+  <div class="subtitle">Last updated: {now.strftime('%b %d, %Y %H:%M UTC')}</div>
   <div class="subtitle">Published {publish_date.strftime('%b %d, %Y')} &middot; Day {days_since_publish:.1f} &middot; Target: {target.strftime('%b %d, %Y')}</div>
 
   <div class="stats">
@@ -620,6 +623,31 @@ def _fmt_decay(value: float | None) -> str:
     return f"{value:.3f}"
 
 
+def git_push_report(report_path: Path, csv_path: Path):
+    """Auto-commit and push the report and CSV to GitHub for Pages hosting."""
+    repo_dir = report_path.parent
+    try:
+        subprocess.run(
+            ["git", "add", str(report_path.name), str(csv_path.name)],
+            cwd=repo_dir, capture_output=True, timeout=10,
+        )
+        result = subprocess.run(
+            ["git", "commit", "-m", f"Update report {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}"],
+            cwd=repo_dir, capture_output=True, timeout=10,
+        )
+        if result.returncode == 0:
+            subprocess.run(
+                ["git", "push"],
+                cwd=repo_dir, capture_output=True, timeout=30,
+            )
+            print("  Pushed to GitHub Pages")
+        else:
+            # Nothing to commit (no changes)
+            pass
+    except Exception as e:
+        print(f"  Git push failed: {e}")
+
+
 def format_number(n: int) -> str:
     """Format a number with commas."""
     return f"{n:,}"
@@ -772,6 +800,7 @@ def main():
                     report_path=report_path,
                 )
                 print(f"  Report:        {report_path}")
+                git_push_report(report_path, csv_path)
 
         except requests.exceptions.RequestException as e:
             print(f"\n  API error: {e} — will retry next cycle")
